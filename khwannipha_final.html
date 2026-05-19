@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khwannipha — 3D Artist Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --peach:#F5C5B0;--peach-light:#FAE5DA;--peach-dark:#E8A088;
+  --cream:#FDF6F0;--brown:#3D1F12;--brown-mid:#6B3A28;
+  --sage:#B5C9B0;--sage-light:#DCE9D8;
+  --lilac:#C9B8E8;--lilac-light:#EDE6F8;
+  --yellow:#F5D98A;--muted:#9B7060;
+  --font-head:'Nunito',sans-serif;--font-body:'Mitr',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:var(--font-body);font-size:14px;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(253,246,240,.93);backdrop-filter:blur(10px);border-bottom:2px solid var(--peach-light)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--brown)}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--peach-dark)}
+.nav-links{display:flex;gap:.5rem;list-style:none}
+.nav-links a{color:var(--brown-mid);text-decoration:none;font-family:var(--font-head);font-weight:700;font-size:13px;padding:.4rem 1rem;border-radius:2rem;transition:.25s}
+.nav-links a:hover{background:var(--peach-light)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 3rem 4rem;position:relative;overflow:hidden}
+.blob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:65vw;height:65vw;max-width:650px;max-height:650px;background:var(--peach-light);border-radius:60% 40% 55% 45%/50% 60% 40% 50%;z-index:0;animation:blob 6s ease-in-out infinite}
+@keyframes blob{0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}50%{border-radius:45% 55% 40% 60%/60% 40% 55% 45%}}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1100px;margin:0 auto;width:100%}
+.badge{display:inline-block;background:var(--peach-dark);color:#fff;font-family:var(--font-head);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1rem;border-radius:2rem;margin-bottom:1.5rem}
+h1{font-family:var(--font-head);font-size:clamp(3rem,5.5vw,5rem);font-weight:900;line-height:1.05;margin-bottom:.25rem}
+.accent{color:var(--peach-dark)}
+.hero-sub{font-family:var(--font-head);font-size:1.2rem;font-weight:700;color:var(--brown-mid);margin-bottom:1.25rem}
+.hero-desc{color:var(--muted);font-size:13px;line-height:1.9;max-width:400px;margin-bottom:2rem}
+.btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;padding:.7rem 1.8rem;border-radius:3rem;font-family:var(--font-head);font-weight:700;font-size:14px;text-decoration:none;transition:.25s;border:none;cursor:pointer}
+.btn-p{background:var(--brown);color:#fff}.btn-p:hover{background:var(--brown-mid);transform:translateY(-2px)}
+.btn-o{background:transparent;color:var(--brown);border:2px solid var(--peach-dark)}.btn-o:hover{background:var(--peach-light);transform:translateY(-2px)}
+.hero-visual{display:flex;flex-direction:column;gap:1rem;align-items:center}
+.hero-cover{width:100%;max-width:400px;border-radius:50%;overflow:hidden;animation:float 4s ease-in-out infinite;border:4px solid var(--peach);background:var(--peach);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.hero-cover img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.pills{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:340px}
+.pill{font-family:var(--font-head);font-weight:700;font-size:12px;padding:.3rem .9rem;border-radius:2rem;background:#fff;color:var(--brown-mid);border:2px solid var(--peach)}
+.pill.s{background:var(--sage-light);border-color:var(--sage);color:#3A5C36}
+.pill.l{background:var(--lilac-light);border-color:var(--lilac);color:#4A3875}
+.pill.y{background:#FDF3D0;border-color:var(--yellow);color:#7A5E12}
+
+/* SECTIONS */
+section{padding:5rem 3rem}
+.stag{display:inline-block;font-family:var(--font-head);font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--peach-dark);margin-bottom:.75rem}
+h2{font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;margin-bottom:.5rem}
+.sdesc{color:var(--muted);font-size:13px;max-width:500px;margin-bottom:3rem}
+
+/* ABOUT */
+#about{background:var(--peach-light);border-radius:3rem;margin:0 1.5rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:1000px;margin:0 auto}
+.card{background:#fff;border-radius:2rem;padding:1.75rem;border:2px solid var(--peach)}
+.card.sage{border-color:var(--sage)}
+.card h3{font-family:var(--font-head);font-weight:800;font-size:1rem;color:var(--brown);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.card h3::before{content:'';display:inline-block;width:10px;height:10px;background:var(--peach-dark);border-radius:50%}
+.srow{display:flex;align-items:center;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--peach-light);font-size:13px;color:var(--brown-mid)}
+.srow:last-child{border-bottom:none}
+.srow::before{content:'✦';color:var(--peach-dark);font-size:10px}
+.edu-badge{display:inline-block;background:var(--sage-light);color:#3A5C36;font-family:var(--font-head);font-weight:700;font-size:11px;padding:.3rem .9rem;border-radius:2rem;margin-bottom:1rem;border:1.5px solid var(--sage)}
+
+/* PROJECTS */
+.project-list{display:flex;flex-direction:column;gap:5rem;max-width:1150px;margin:0 auto}
+.pitem{display:grid;grid-template-columns:1fr 1.8fr;gap:3rem;align-items:start;opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.pitem.visible{opacity:1;transform:translateY(0)}
+.pitem.flip{grid-template-columns:1.8fr 1fr}
+.pitem.flip .pinfo{order:2}.pitem.flip .pgallery{order:1}
+.pnum{font-family:var(--font-head);font-weight:800;font-size:11px;letter-spacing:.1em;color:var(--peach-dark);text-transform:uppercase;margin-bottom:.5rem}
+.ptitle{font-family:var(--font-head);font-weight:900;font-size:1.6rem;margin-bottom:.25rem;line-height:1.2}
+.psubtitle{font-size:1rem;color:var(--muted);font-family:var(--font-head);font-weight:600;margin-bottom:.75rem}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:.75rem}
+.pspec{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.spec-item{font-family:var(--font-head);font-weight:700;font-size:11px;padding:.25rem .75rem;border-radius:2rem;background:var(--sage-light);color:#3A5C36;border:1.5px solid var(--sage)}
+.ptags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.ptag{font-family:var(--font-head);font-weight:700;font-size:11px;padding:.2rem .7rem;border-radius:2rem;background:var(--peach-light);color:var(--brown-mid)}
+.ptag.s{background:var(--sage-light);color:#3A5C36}
+.ptag.l{background:var(--lilac-light);color:#4A3875}
+
+/* GALLERY */
+.pcov{border-radius:2rem;overflow:hidden;border:2px solid var(--peach-light);background:var(--peach-light)}
+.pcov img{width:100%;display:block;object-fit:cover}
+.pgrid{display:grid;gap:.5rem;margin-top:.5rem}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.pgrid img{width:100%;object-fit:cover;border-radius:.75rem;cursor:pointer;transition:transform .25s;aspect-ratio:1}
+.pgrid img:hover{transform:scale(1.04)}
+.pgrid img.wide{aspect-ratio:16/9}
+.pgrid img.tall{aspect-ratio:3/4}
+
+/* IMAGE PLACEHOLDER */
+.img-ph{background:var(--peach-light);border:2px dashed var(--peach-dark);border-radius:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--peach-dark);font-family:var(--font-head);font-weight:700;font-size:12px;text-align:center;padding:1rem;cursor:pointer}
+.img-ph .ph-icon{font-size:2rem;opacity:.5}
+.img-ph.sq{aspect-ratio:1}
+.img-ph.wide{aspect-ratio:16/9}
+.img-ph.tall{aspect-ratio:3/4}
+.img-ph.cover{aspect-ratio:1;border-radius:2rem;border-width:2px}
+
+/* REF BOX */
+.ref-box{margin-top:.75rem;background:var(--cream);border-radius:1.5rem;padding:1rem;border:1.5px dashed var(--peach-dark)}
+.ref-lbl{font-family:var(--font-head);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--peach-dark);margin-bottom:.5rem}
+.ref-box img{width:100%;border-radius:.75rem;cursor:pointer}
+.ref-box .img-ph{aspect-ratio:4/3}
+
+/* CHALLENGE BOX */
+.challenge-box{background:var(--lilac-light);border-radius:1.25rem;padding:1rem 1.25rem;margin-top:.75rem;border:1.5px solid var(--lilac)}
+.challenge-lbl{font-family:var(--font-head);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#4A3875;margin-bottom:.4rem}
+.challenge-box p{font-size:12px;color:#4A3875;line-height:1.7}
+
+/* SOFTWARE */
+#software{background:var(--brown);border-radius:3rem;margin:0 1.5rem;color:var(--cream)}
+#software h2{color:var(--cream)}
+#software .stag{color:var(--peach)}
+#software .sdesc{color:rgba(253,246,240,.6)}
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:1rem;max-width:920px}
+.swc{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:1.5rem;padding:1.5rem 1rem;text-align:center;transition:.25s}
+.swc:hover{background:rgba(245,197,176,.15);border-color:var(--peach);transform:translateY(-3px)}
+.swc .i{font-size:2rem;margin-bottom:.5rem}
+.swc .n{font-family:var(--font-head);font-weight:700;font-size:13px;color:var(--cream)}
+.swc .t{font-size:11px;color:rgba(253,246,240,.5);margin-top:.2rem}
+.swc .i img{width:2.5rem;height:2.5rem;object-fit:contain;display:block;margin:0 auto}
+
+/* CONTACT */
+#contact{text-align:center}
+.ccard{background:var(--peach-light);border-radius:3rem;padding:4rem 3rem;max-width:680px;margin:2rem auto 0;border:2px solid var(--peach);position:relative;overflow:hidden}
+.ccard::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:var(--peach);border-radius:50%;opacity:.4}
+.ccard::after{content:'';position:absolute;bottom:-60px;left:-40px;width:150px;height:150px;background:var(--sage-light);border-radius:50%;opacity:.5}
+.cinner{position:relative;z-index:1}
+.citems{display:flex;flex-direction:column;gap:.9rem;margin:1.75rem 0}
+.ci{display:flex;align-items:center;gap:1rem;background:#fff;border-radius:1.5rem;padding:1rem 1.5rem;border:2px solid var(--peach-light);transition:.25s;text-align:left}
+.ci:hover{border-color:var(--peach-dark)}
+.cicon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.cp{background:var(--peach-light)}.cs{background:var(--sage-light)}.cl{background:var(--lilac-light)}
+.clbl{font-family:var(--font-head);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cval{font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--brown)}
+.cval a{color:inherit;text-decoration:none}.cval a:hover{color:var(--peach-dark)}
+
+/* ARTSTATION BADGE */
+.artstation-btn{display:inline-flex;align-items:center;gap:.6rem;background:#13AFF0;color:#fff;padding:.6rem 1.4rem;border-radius:2rem;font-family:var(--font-head);font-weight:700;font-size:13px;text-decoration:none;transition:.25s;margin-top:.75rem}
+.artstation-btn:hover{background:#0e9fd8;transform:translateY(-2px)}
+
+footer{text-align:center;padding:3rem;color:var(--muted);font-size:13px;font-family:var(--font-head);font-weight:600}
+footer strong{color:var(--brown)}
+
+/* LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center;padding:2rem}
+.lb.open{display:flex}
+.lb img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:1rem}
+.lb-x{position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,.15);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;font-family:var(--font-head);font-weight:800}
+
+/* EDIT GUIDE (จะไม่แสดงตอน print) */
+.edit-guide{background:#FFF9E6;border:2px dashed #F5C518;border-radius:1rem;padding:.75rem 1rem;margin-bottom:1.5rem;font-size:12px;color:#7A5E12;font-family:var(--font-head);font-weight:600}
+.edit-guide strong{color:#E8A500}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .hero{padding:6rem 1.5rem 3rem}.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}
+  section{padding:4rem 1.5rem}
+  #about,#software{margin:0;border-radius:0}
+  .about-grid{grid-template-columns:1fr;gap:1.25rem}
+  .pitem,.pitem.flip{grid-template-columns:1fr}
+  .pitem.flip .pinfo,.pitem.flip .pgallery{order:unset}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .ccard{padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  🗺️  แผนผังไฟล์นี้
+  - แก้ข้อความ → หาคำแล้วแก้ได้เลย
+  - ใส่รูป → หา <img src="ใส่ลิงก์รูปตรงนี้"> แล้วใส่ URL รูป
+  - เพิ่มโปรเจกต์ → copy block PROJECT ทั้งก้อนแล้ว paste ต่อท้าย
+  ============================================================ -->
+
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    <!-- ✏️ แก้ชื่อใน nav -->
+    Khwannipha
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Projects</a></li>
+    <li><a href="#software">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ==============================
+  HERO SECTION
+============================== -->
+<div class="hero">
+  <div class="blob"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="badge">✦ Portfolio · Model 3D</div>
+
+      <!-- ✏️ แก้ชื่อ -->
+      <h1><span class="accent">Khwannipha</span><br>Kobsuktawonkul</h1>
+      <p class="hero-sub">3D Artist · Digital Media</p>
+
+      <!-- ✏️ แก้ bio — ตอบ 3 คำถาม: ฉันคือใคร / ทำอะไรได้ / อยากทำอะไร -->
+      <p class="hero-desc">
+        นักศึกษาชั้นปีที่ 3 สาขา Interactive Design and Game ม.ศรีปทุม
+        เชี่ยวชาญการสร้าง Stylized 3D Character ด้วย Maya, ZBrush และ Nomad sculpt
+        ตั้งแต่ Concept ไปจนถึง Game-Ready Asset
+        มุ่งพัฒนาตัวเองสู่ Character Artist มืออาชีพในอุตสาหกรรมเกม
+      </p>
+
+      <div class="btns">
+        <a href="#work" class="btn btn-p">ดูผลงาน</a>
+        <a href="#contact" class="btn btn-o">ติดต่อฉัน</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-cover">
+        <!-- ✏️ ใส่รูปปก Hero ตรงนี้ -->
+        <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/Pink.png?raw=true" alt="Portfolio Cover" />
+      </div>
+      <div class="pills">
+        <span class="pill">Maya</span>
+        <span class="pill s">ZBrush</span>
+        <span class="pill">Nomad sculpt</span>
+        <span class="pill y">Substance</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==============================
+  ABOUT SECTION
+============================== -->
+<section id="about">
+  <div style="max-width:1000px;margin:0 auto">
+    <div class="stag">✦ About Me</div>
+    <h2>เกี่ยวกับฉัน</h2>
+    <p class="sdesc">ข้อมูลการศึกษาและทักษะของฉัน</p>
+
+    <div class="about-grid">
+      <div>
+        <!-- ✏️ แก้ปีการศึกษา / มหาวิทยาลัย / สาขา -->
+        <div class="card sage" style="margin-bottom:1.25rem">
+          <div class="edu-badge">พ.ศ. 2566 – 2569</div>
+          <h4 style="font-family:var(--font-head);font-weight:800;font-size:1rem;color:var(--brown);margin-bottom:.25rem">
+            มหาวิทยาลัยศรีปทุม
+          </h4>
+          <p style="font-size:13px;color:var(--muted)">
+            คณะดิจิทัลมีเดีย<br>
+            สาขาการออกแบบอินเทอร์แอคทีฟและเกม
+          </p>
+        </div>
+
+        <!-- ✏️ แก้ทักษะเฉพาะทาง -->
+        <div class="card">
+          <h3>Specialties</h3>
+          <div class="srow">Stylized Character Modeling</div>
+          <div class="srow">ZBrush Sculpting</div>
+          <div class="srow">Maya Low Poly Modeling</div>
+          <div class="srow">UV Unwrap & Texturing</div>
+          <div class="srow">Nomad Sculpt Workflow</div>
+        </div>
+      </div>
+
+      <!-- ✏️ แก้ soft skills และ availability -->
+      <div class="card">
+        <h3>Soft Skills</h3>
+        <div class="srow">วิเคราะห์และแก้ปัญหาได้ดี</div>
+        <div class="srow">ทำงานเป็นทีมได้ดี</div>
+        <div class="srow">เรียนรู้ได้รวดเร็ว</div>
+        <div class="srow">ความคิดสร้างสรรค์สูง</div>
+        <div class="srow">รับ Feedback และปรับปรุงได้ดี</div>
+
+        <h3 style="margin-top:1.25rem">Available for</h3>
+        <div class="srow" style="color:var(--brown);font-weight:700">Internship</div>
+        <div class="srow" style="color:var(--brown);font-weight:700">Freelance</div>
+        <div class="srow" style="color:var(--brown);font-weight:700">Part-time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+  PROJECTS SECTION
+============================== -->
+<section id="work" style="max-width:1200px;margin:0 auto">
+  <div class="stag">✦ Projects</div>
+  <h2>ผลงานของฉัน</h2>
+  <p class="sdesc">ผลงาน 3D Modeling ทั้งหมดที่สร้างขึ้น</p>
+
+  <div class="project-list">
+
+    <!-- ==========================================
+      PROJECT 01 — Pink Dragon
+      (โปรเจกต์คี่ = info ซ้าย, รูป ขวา)
+    ========================================== -->
+    <div class="pitem">
+      <div class="pinfo">
+        <!-- ✏️ แก้หมายเลข ชื่อ subtitle -->
+        <div class="pnum">Project 01</div>
+        <div class="ptitle">ลูกมังกรน้อย</div>
+        <div class="psubtitle">Stylized Dragon Character · Nomad sculpt</div>
+
+        <!-- ✏️ อธิบายผลงาน: มันคืออะไร / ทำด้วยอะไร / ความท้าทาย -->
+        <p class="pdesc">
+          สร้างตัวละครมังกรสไตล์ Stylized ในโทนน่ารักและอบอุ่น 
+          โดยเน้นการออกแบบ silhouette ให้จดจำง่าย พร้อมทดลองรูปทรง สี 
+          และรายละเอียดพื้นผิว เพื่อพัฒนาทักษะด้าน 
+          Character Modeling และ Character Design
+        </p>
+
+        <!-- ✏️ ใส่ Polycount / Software / เวลาที่ใช้ -->
+        <div class="pspec">
+          <span class="spec-item">🔺 Tris: High Poly</span>
+          <span class="spec-item">⏱ ระยะเวลา: 1 สัปดาห์</span>
+        </div>
+
+        <!-- ✏️ แก้ tags -->
+        <div class="ptags">
+          <span class="ptag">Nomad sculpt</span>
+          <span class="ptag s">Modeling</span>
+          <span class="ptag l">Color & Lighting</span>
+          <span class="ptag">Character Design</span>
+        </div>
+
+        <!-- ✏️ ความท้าทายและวิธีแก้ (สำคัญมาก!) -->
+        <div class="challenge-box">
+          <div class="challenge-lbl">💡 Challenge & Solution</div>
+          <p>ส่วนที่ท้าทายที่สุดคือการปรับรูปทรงศีรษะและตำแหน่งดวงตาให้สมดุลในทุกมุมมอง 
+           จึงใช้เวลาในการปรับสัดส่วนและ silhouette หลายครั้ง</p>
+        </div>
+
+        <!-- ✏️ ใส่รูป reference -->
+        <div class="ref-box">
+          <div class="ref-lbl">📌 Reference / Concept</div>
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/pinkRef.png?raw=true" onclick="openLB(this.src)" />
+        </div>
+      </div>
+
+      <div class="pgallery">
+        <!-- ✏️ รูปปกโปรเจกต์ (ใหญ่) -->
+        <div class="pcov">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/pinkDragon.png?raw=true" alt="Pink Dragon Cover" onclick="openLB(this.src)" style="aspect-ratio:1;object-fit:cover" />
+        </div>
+
+        <!-- ✏️ รูปรอบด้าน 4 มุม -->
+        <div class="pgrid g4">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/pink1.png?raw=true" alt="Front" onclick="openLB(this.src)" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/pink2.png?raw=true" alt="Side" onclick="openLB(this.src)" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/pink3.1.png?raw=true" alt="Back" onclick="openLB(this.src)" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/pink%20dragon/pink4.png?raw=true" alt="Side 2" onclick="openLB(this.src)" />
+        </div>
+
+        <!-- Wireframe + UV — ใส่รูปได้เลยถ้ามี -->
+        <!--
+        <div class="pgrid g2">
+          <img src="ใส่ลิงก์รูป Wireframe" alt="Wireframe" onclick="openLB(this.src)" class="wide" />
+          <img src="ใส่ลิงก์รูป UV Map" alt="UV Map" onclick="openLB(this.src)" class="wide" />
+        </div>
+        -->
+      </div>
+    </div>
+
+    <!-- ==========================================
+      PROJECT 02 — Chibi Girl
+      (โปรเจกต์คู่ = รูป ซ้าย, info ขวา)
+    ========================================== -->
+    <div class="pitem flip">
+      <div class="pgallery">
+        <div class="pcov" style="background:#3D1F12">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Chibi%20Girl/Girl.png?raw=true" alt="Chibi Girl Cover" onclick="openLB(this.src)" style="aspect-ratio:1;object-fit:cover" />
+        </div>
+        <div class="pgrid g3">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Chibi%20Girl/girl1.png?raw=true" alt="Front" onclick="openLB(this.src)" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Chibi%20Girl/girl2.png?raw=true" alt="Side" onclick="openLB(this.src)" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Chibi%20Girl/girl3.png?raw=true" alt="Back" onclick="openLB(this.src)" />
+        </div>
+      </div>
+
+      <div class="pinfo">
+        <div class="pnum">Project 02</div>
+        <div class="ptitle">Chibi Girl</div>
+        <div class="psubtitle">Stylized Character · Nomad sculpt</div>
+        <p class="pdesc">
+          สร้างโมเดลตัวละครเด็กหญิงสไตล์ Chibi Stylized โดยอ้างอิงจาก Character Sheet 
+          เพื่อฝึกทักษะการปั้นตัวละคร การจัดสัดส่วนแบบจิบิ
+        </p>
+        <div class="pspec">
+          <span class="spec-item">🔺 Tris: High Poly</span>
+          <span class="spec-item">⏱ ระยะเวลา: 1 สัปดาห์</span>
+        </div>
+        <div class="ptags">
+          <span class="ptag">Stylized Sculpting</span>
+          <span class="ptag s">Character Modeling</span>
+          <span class="ptag l">Hair Modeling</span>
+        </div>
+        <div class="challenge-box">
+          <div class="challenge-lbl">💡 Challenge & Solution</div>
+          <p>ส่วนที่ท้าทายที่สุดคือการปรับรูปทรงศีรษะและทรงผมให้สมดุลกับสัดส่วนแบบจิบิ 
+            จึงใช้เวลาในการปรับ silhouette และรายละเอียดของเส้นผมหลายครั้ง</p>
+        </div>
+        <div class="ref-box">
+          <div class="ref-lbl">📌 Reference / Concept</div>
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Chibi%20Girl/girlref.png?raw=true" onclick="openLB(this.src)" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+      PROJECT 03 — Green Dragon
+    ========================================== -->
+    <div class="pitem">
+      <div class="pinfo">
+        <div class="pnum">Project 03</div>
+        <div class="ptitle">Green Dragon</div>
+        <div class="psubtitle">Stylized Character · ZBrush</div>
+        <p class="pdesc">
+         ออกแบบและสร้างมังกรน้อยสีเขียวสไตล์ Stylized พร้อมจัดทำ Topology แบบ Clean 
+         สำหรับฝึกกระบวนการทำงาน Game Asset ตั้งแต่ Sculpt, Retopology, UV 
+         ไปจนถึง Texturing พร้อมแสดง Wireframe ของโมเดล
+        </p>
+        <div class="pspec">
+          <span class="spec-item">🔺 Tris: 4.6k poly</span>
+          <span class="spec-item">⏱ ระยะเวลา: 1 สัปดาห์</span>
+          <span class="spec-item">🎮 Game Ready</span>
+        </div>
+        <div class="ptags">
+          <span class="ptag">ZBrush</span>
+          <span class="ptag s">Autodesk Maya</span>
+          <span class="ptag l">Adobe Substance 3D Painter</span>
+        </div>
+        <div class="challenge-box">
+          <div class="challenge-lbl">💡 Challenge & Solution</div>
+          <p>ส่วนที่ท้าทายที่สุดคือการทำ Texture ให้ได้สีและพื้นผิวตามที่ออกแบบไว้ จึงทดลองปรับ Material 
+            และโทนสีหลายครั้งใน Adobe Substance 3D Painter 
+            เพื่อให้ตัวละครดูสมดุลและเข้ากับสไตล์ที่ต้องการ</p>
+        </div>
+        <div class="ref-box">
+          <div class="ref-lbl">📌 Reference / Concept</div>
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/geen%20dragon/geenRef.png?raw=true" onclick="openLB(this.src)" />
+        </div>
+      </div>
+      <div class="pgallery">
+        <div class="pcov">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/geen%20dragon/GeenDragon.png?raw=true" alt="Green Dragon" onclick="openLB(this.src)" style="aspect-ratio:16/9;object-fit:cover" />
+        </div>
+        <div class="pgrid g2">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/geen%20dragon/Geen2.png?raw=true" alt="Front & Back" onclick="openLB(this.src)" class="wide" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/geen%20dragon/geenLow1.png?raw=true" alt="Wireframe" onclick="openLB(this.src)" class="wide" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/geen%20dragon/geenLow2.png?raw=true" alt="Wireframe" onclick="openLB(this.src)" class="wide" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/geen%20dragon/geenUV.png?raw=true" alt="UV" onclick="openLB(this.src)" class="wide" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+      PROJECT 04 — Monster
+    ========================================== -->
+    <div class="pitem flip">
+      <div class="pgallery">
+        <div class="pcov" style="background:#222">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/monster/Monster%20Finish.jpg?raw=true" alt="Monster" onclick="openLB(this.src)" style="aspect-ratio:1;object-fit:cover" />
+        </div>
+        <div class="pgrid g3">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/monster/Monster%20Finish%201.jpg?raw=true" alt="Back" onclick="openLB(this.src)" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/monster/mon3.png?raw=true" alt="Sculpt" onclick="openLB(this.src)" class="wide" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/monster/monUV.png?raw=true" alt="Lowpoly & UV" onclick="openLB(this.src)" class="wide" />
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pnum">Project 04</div>
+        <div class="ptitle">Monster</div>
+        <div class="psubtitle">ZBrush Sculpt → Game Asset</div>
+        <p class="pdesc">
+          ปั้นโมเดลมอนสเตอร์จาก Concept Art ด้วย ZBrush
+          ฝึกทักษะ Sculpting รายละเอียดพื้นผิว Retopology
+          UV Unwrap และ Texture Painting เต็ม Pipeline
+        </p>
+        <div class="pspec">
+          <span class="spec-item">🔺 Tris: ~5k poly</span>
+          <span class="spec-item">⏱ Classroom Project</span>
+        </div>
+        <div class="ptags">
+          <span class="ptag">ZBrush</span>
+          <span class="ptag s">Sculpting</span>
+          <span class="ptag l">Retopology</span>
+          <span class="ptag">UV + Texture</span>
+        </div>
+        <div class="challenge-box">
+          <div class="challenge-lbl">💡 Challenge & Solution</div>
+          <p>ส่วนที่ท้าทายที่สุดคือการปั้นผ้าพันคอให้ดูมีความอ่อนตัวและเป็นธรรมชาติ</p>
+        </div>
+        <div class="ref-box">
+          <div class="ref-lbl">📌 Original Concept </div>
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/monster/monsterRef.png?raw=true" onclick="openLB(this.src)" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+      PROJECT 05 — Gacha Chicken
+    ========================================== -->
+    <div class="pitem">
+      <div class="pinfo">
+        <div class="pnum">Project 05</div>
+        <div class="ptitle">Gacha Egg Chicken</div>
+        <div class="psubtitle">Original Design · Maya Rig + Animation</div>
+        <p class="pdesc">
+          ออกแบบตู้กาชารูปแม่ไก่ Original Design สร้างโมเดลด้วย Maya
+          พร้อม Rig สำหรับ Animation มี Turntable Video แสดงผลงาน
+        </p>
+        <div class="pspec">
+          <span class="spec-item">⏱ ระยะเวลา: 5 วัน</span>
+          <span class="spec-item">🦴 Rigged</span>
+        </div>
+        <div class="ptags">
+          <span class="ptag">Maya</span>
+          <span class="ptag s">Rigging</span>
+          <span class="ptag l">Original Design</span>
+          <span class="ptag">Animation</span>
+        </div>
+        <div class="challenge-box">
+          <div class="challenge-lbl">💡 Challenge & Solution</div>
+          <p>มีการปรับมุมกล้องและ Animation หลายครั้ง 
+            เพื่อให้เห็นจังหวะที่ไข่กาชาตกลงมาได้ชัดเจนมากขึ้น</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-lbl">📌 Original Concept Design</div>
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Egg/EggRef.jpg?raw=true" alt="Front" onclick="openLB(this.src)" class="tall" />
+        </div>
+      </div>
+      <div class="pgallery">
+        <div class="pcov" style="background:#000;border-radius:2rem;overflow:hidden">
+          <iframe width="100%" height="300" src="https://www.youtube.com/embed/ooVH4z4iPFE" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen style="display:block"></iframe>
+        </div>
+        <div class="pgrid g3">
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Egg/Egg1.png?raw=true" alt="Front" onclick="openLB(this.src)" class="tall" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Egg/Egg2.png?raw=true" alt="Side" onclick="openLB(this.src)" class="tall" />
+          <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/Egg/Egg3.png?raw=true" alt="Back" onclick="openLB(this.src)" class="tall" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+      ✏️ เพิ่มโปรเจกต์ใหม่ — copy block นี้แล้ว paste ต่อท้าย
+      สลับ class="pitem" และ "pitem flip" สลับกันไปเรื่อยๆ
+    ========================================== -->
+    <!--
+    <div class="pitem">
+      <div class="pinfo">
+        <div class="pnum">Project 06</div>
+        <div class="ptitle">ชื่อโปรเจกต์</div>
+        <div class="psubtitle">subtitle · Software</div>
+        <p class="pdesc">อธิบายผลงาน</p>
+        <div class="pspec">
+          <span class="spec-item">🔺 Tris: จำนวน</span>
+          <span class="spec-item">⏱ ระยะเวลา</span>
+        </div>
+        <div class="ptags">
+          <span class="ptag">Tag</span>
+        </div>
+      </div>
+      <div class="pgallery">
+        <div class="pcov">
+          <img src="ลิงก์รูปปก" onclick="openLB(this.src)" style="aspect-ratio:1;object-fit:cover" />
+        </div>
+      </div>
+    </div>
+    -->
+
+  </div>
+</section>
+
+<!-- ==============================
+  SOFTWARE SECTION
+============================== -->
+<section id="software">
+  <div style="max-width:1000px;margin:0 auto">
+    <div class="stag">✦ Tools</div>
+    <h2>โปรแกรมที่ใช้</h2>
+    <p class="sdesc">Software และ Tools ที่ใช้ในการสร้างผลงาน</p>
+
+    <!-- ✏️ เพิ่ม/ลด software ได้เลย -->
+    <div class="sw-grid">
+      <div class="swc"><div class="i"> <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/program/Maya.png?raw=true" alt="Back" onclick="openLB(this.src)" class="tall" /></div><div class="n">Maya</div><div class="t">Modeling · Rigging</div></div>
+      <div class="swc"><div class="i"> <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/program/ZB.png?raw=true" alt="Back" onclick="openLB(this.src)" class="tall" /></div><div class="n">ZBrush</div><div class="t">Sculpting</div></div>
+      <div class="swc"><div class="i"> <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/program/NM.png?raw=true" alt="Back" onclick="openLB(this.src)" class="tall" /></div><div class="n">Nomad sculpt</div><div class="t">3D · Animation</div></div>
+      <div class="swc"><div class="i"> <img src="https://github.com/khwannipha/3D-Portfolio/blob/main/program/Pt.png?raw=true" alt="Back" onclick="openLB(this.src)" class="tall" /></div><div class="n">Substance</div><div class="t">Texturing</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+  CONTACT SECTION
+============================== -->
+<section id="contact">
+  <div class="stag">✦ Contact</div>
+  <h2>ติดต่อฉัน</h2>
+  <div class="ccard">
+    <div class="cinner">
+      <p style="color:var(--muted);font-size:14px">
+        ขอบคุณที่สละเวลาเข้าชมผลงาน 🌸<br>
+      </p>
+
+      <div class="citems">
+        <!-- ✏️ แก้ email / phone / location -->
+        <div class="ci">
+          <div class="cicon cp">📧</div>
+          <div>
+            <div class="clbl">Email</div>
+            <div class="cval"><a href="mailto:khwannipha.kob@gmail.com">khwannipha.kob@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="cicon cs">📞</div>
+          <div>
+            <div class="clbl">Phone</div>
+            <div class="cval">082-821-5933</div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="cicon cl">📍</div>
+          <div>
+            <div class="clbl">Location</div>
+            <div class="cval">กรุงเทพฯ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btns" style="justify-content:center;gap:.75rem;margin-top:1.25rem">
+        <a href="mailto:khwannipha.kob@gmail.com" class="btn btn-p">ส่ง Email ✉️</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✏️ แก้ชื่อใน footer -->
+<footer>
+  <strong>Khwannipha Kobsuktawonkul</strong> · 3D Artist · Bangkok, TH · 2026 ✦
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLB()">
+  <button class="lb-x" onclick="closeLB()">✕</button>
+  <img id="lb-img" src="" onclick="event.stopPropagation()" />
+</div>
+
+<script>
+function openLB(src){ document.getElementById('lb-img').src=src; document.getElementById('lb').classList.add('open'); }
+function closeLB(){ document.getElementById('lb').classList.remove('open'); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB(); });
+
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}), {threshold: 0.1});
+document.querySelectorAll('.pitem').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
